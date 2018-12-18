@@ -1,0 +1,8 @@
+idea/
+data/
+__pycache__/
+tmp/
+*.tar.gz
+*.pyc
+*.log
+
