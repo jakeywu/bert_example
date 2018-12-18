@@ -22,26 +22,8 @@ class DataBase:
 
     @staticmethod
     def _classify_name_ids():
-        return {
-            "政策监管": 0,
-            "合作竞争": 1,
-            "股价行情": 2,
-            "欺诈骗局": 3,
-            "裁员降薪": 4,
-            "企业盈亏": 5,
-            "股权变动": 6,
-            "公告公示": 7,
-            "成果奖项": 8,
-            "高管动态": 9,
-            "上市资讯": 10,
-            "债务信息": 11,
-            "司法涉诉": 12,
-            "运营状况": 13,
-            "事故信息": 14,
-            "投资融资": 15,
-            "产品相关": 16,
-            "战略发展": 17
-        }
+        with codecs.open("data/origindata/classify_name_ids.txt", "r", "utf8") as f:
+            return eval(f.read())
 
     @staticmethod
     def _read_dataset(file_path):
@@ -126,7 +108,7 @@ class PrepareDataSet(DataBase):
             if len(test_lst) % self.file_split_num == 0:
                 count += 1
                 self._convert_tf_records(test_lst, test_tfrecords_name.format(str(count)))
-                train_lst = []
+                test_lst = []
         if len(test_lst) > 0:
             self._convert_tf_records(test_lst, test_tfrecords_name.format(str(count+1)))
         del test_lst
